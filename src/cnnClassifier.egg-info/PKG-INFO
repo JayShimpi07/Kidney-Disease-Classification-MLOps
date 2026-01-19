@@ -1,0 +1,26 @@
+Metadata-Version: 2.4
+Name: cnnClassifier
+Version: 0.0.0
+Summary: A small python package for CNN app
+Home-page: https://github.com/JayShimpi07/Kidney-Disease-Classification-MLOps
+Author: JayShimpi07
+Author-email: jayshimpi2005@gmail.com
+Project-URL: Bug Tracker, https://github.com/JayShimpi07/Kidney-Disease-Classification-MLOps/issues
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: home-page
+Dynamic: project-url
+Dynamic: summary
+
+End-to-End Deep Learning Kidney Disease Classification
+
+Deep Learning model (CNN / Transfer Learning)
+
+MLOps pipeline
+
+DVC → data + model versioning, pipelines
+
+MLflow → experiment tracking + model registry
+
+Full lifecycle: data → training → evaluation → deployment

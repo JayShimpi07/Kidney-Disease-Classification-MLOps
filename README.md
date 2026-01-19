@@ -1,11 +1,23 @@
-End-to-End Deep Learning Kidney Disease Classification
+# How to run?
+### STEPS:
 
-Deep Learning model (CNN / Transfer Learning)
+Clone the repository
 
-MLOps pipeline
+```bash
+https://github.com/JayShimpi07/Kidney-Disease-Classification-MLOps.git
+```
 
-DVC → data + model versioning, pipelines
+### STEP 01 - Create a conda environment after opening the repository
 
-MLflow → experiment tracking + model registry
+```bash
+conda create -n kidney python=3.10 -y
+```
 
-Full lifecycle: data → training → evaluation → deployment
+```bash
+conda activate kidney
+```
+
+### STEP 02 - Install the requirements
+```bash
+pip install -r requirements.txt
+```
