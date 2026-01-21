@@ -37,3 +37,47 @@ conda activate kidney
 ```bash
 pip install -r requirements.txt
 ```
+
+## MLflow Experiment Tracking
+
+MLflow is used to track experiments, log metrics, parameters, artifacts, and models.
+
+- 📘 [MLflow Documentation ↗](https://mlflow.org/docs/latest/index.html)
+- 🎥 [MLflow Tutorial ↗](https://www.youtube.com/watch?v=qdcHHrsXA48)
+
+
+### Run MLflow UI locally
+```bash
+mlflow ui
+```
+
+### Then open:
+```bash
+http://127.0.0.1:5000
+```
+### Remote Tracking with DagsHub
+
+This project supports remote MLflow tracking using DagsHub.
+
+### Step 1: Create a DagsHub account
+
+🔗 https://dagshub.com/
+
+### Step 2: Generate Access Token
+
+Go to:
+DagsHub → Settings → Tokens → Generate Token
+
+### Export Environment Variables (Linux / Mac)
+```bash
+export MLFLOW_TRACKING_URI="https://dagshub.com/<YOUR_USERNAME>/<YOUR_REPO>.mlflow"
+export MLFLOW_TRACKING_USERNAME="<YOUR_USERNAME>"
+export MLFLOW_TRACKING_PASSWORD="<YOUR_ACCESS_TOKEN>"
+```
+
+### Set Environment Variables (Windows PowerShell)
+```bash
+$env:MLFLOW_TRACKING_URI="https://dagshub.com/<YOUR_USERNAME>/<YOUR_REPO>.mlflow"
+$env:MLFLOW_TRACKING_USERNAME="<YOUR_USERNAME>"
+$env:MLFLOW_TRACKING_PASSWORD="<YOUR_ACCESS_TOKEN>"
+```
