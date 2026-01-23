@@ -81,3 +81,31 @@ $env:MLFLOW_TRACKING_URI="https://dagshub.com/<YOUR_USERNAME>/<YOUR_REPO>.mlflow
 $env:MLFLOW_TRACKING_USERNAME="<YOUR_USERNAME>"
 $env:MLFLOW_TRACKING_PASSWORD="<YOUR_ACCESS_TOKEN>"
 ```
+
+## DVC (Data Version Control)
+
+This project uses **DVC** to manage and reproduce the complete ML pipeline stages (end-to-end training workflow).
+
+### Why DVC?
+- Tracks **data + model artifacts** efficiently without pushing large files to GitHub
+- Helps create reproducible **ML pipelines**
+- Supports orchestration using `dvc.yaml` stages (pipeline automation)
+
+---
+
+### 📌 Common DVC Commands
+
+#### Initialize DVC
+```bash
+dvc init
+```
+
+#### Run the full pipeline
+```bash
+dvc repro
+```
+
+#### Visualize the pipeline DAG (Directed Acyclic Graph)
+```bash
+dvc dag
+```

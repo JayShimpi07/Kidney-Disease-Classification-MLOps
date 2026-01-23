@@ -113,3 +113,106 @@ x==========x]
 [2026-01-22 02:25:29,029: INFO: main: >>>>>> stage Evaluation stage completed <<<<<<
 
 x==========x]
+[2026-01-22 15:01:07,061: INFO: stage_01_data_ingestion: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2026-01-22 15:01:07,065: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-22 15:01:07,071: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-22 15:01:07,073: INFO: common: created directory at: artifacts]
+[2026-01-22 15:01:07,074: INFO: common: created directory at: artifacts/data_ingestion]
+[2026-01-22 15:01:07,074: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1lmmwEVh6II154YNf3fGbEZhlp82pV6dc/view?usp=sharing into file artifacts/data_ingestion/data.zip]
+[2026-01-22 15:05:04,891: INFO: data_ingestion: Downloaded data from https://drive.google.com/file/d/1lmmwEVh6II154YNf3fGbEZhlp82pV6dc/view?usp=sharing into file artifacts/data_ingestion/data.zip]
+[2026-01-22 15:05:37,265: INFO: stage_01_data_ingestion: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x==========x]
+[2026-01-22 15:12:53,634: INFO: stage_02_prepare_base_model: *******************]
+[2026-01-22 15:12:53,636: INFO: stage_02_prepare_base_model: >>>>>> stage Prepare base model started <<<<<<]
+[2026-01-22 15:12:53,638: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-22 15:12:53,643: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-22 15:12:53,645: INFO: common: created directory at: artifacts]
+[2026-01-22 15:12:53,646: INFO: common: created directory at: artifacts/prepare_base_model]
+[2026-01-22 15:12:54,632: WARNING: saving_utils: Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.]
+[2026-01-22 15:12:54,966: INFO: stage_02_prepare_base_model: >>>>>> stage Prepare base model completed <<<<<<
+
+x==========x]
+[2026-01-22 15:20:34,696: INFO: stage_03_model_training: *******************]
+[2026-01-22 15:20:34,697: INFO: stage_03_model_training: >>>>>> stage Training started <<<<<<]
+[2026-01-22 15:20:34,699: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-22 15:20:34,701: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-22 15:20:34,702: INFO: common: created directory at: artifacts]
+[2026-01-22 15:20:34,702: INFO: common: created directory at: artifacts\training]
+[2026-01-22 20:35:48,933: INFO: stage_03_model_training: *******************]
+[2026-01-22 20:35:48,934: INFO: stage_03_model_training: >>>>>> stage Training started <<<<<<]
+[2026-01-22 20:35:48,959: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-22 20:35:48,964: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-22 20:35:48,965: INFO: common: created directory at: artifacts]
+[2026-01-22 20:35:48,965: INFO: common: created directory at: artifacts\training]
+[2026-01-23 00:47:42,324: INFO: stage_03_model_training: >>>>>> stage Training completed <<<<<<
+
+x==========x]
+[2026-01-23 00:49:16,940: INFO: stage_04_model_evaluation: *******************]
+[2026-01-23 00:49:16,941: INFO: stage_04_model_evaluation: >>>>>> stage Evaluation stage started <<<<<<]
+[2026-01-23 00:49:16,944: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-23 00:49:16,949: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-23 00:49:16,949: INFO: common: created directory at: artifacts]
+[2026-01-23 00:57:57,733: INFO: common: json file saved at: scores.json]
+[2026-01-23 00:57:57,736: INFO: common: json file saved at: scores.json]
+[2026-01-23 00:58:02,005: ERROR: stage_04_model_evaluation: INVALID_PARAMETER_VALUE: Response: {'error_code': 'INVALID_PARAMETER_VALUE'}]
+Traceback (most recent call last):
+  File "C:\Users\jaysh\OneDrive\Desktop\Kidney-Disease-Classification-MLOps\src\cnnClassifier\pipeline\stage_04_model_evaluation.py", line 24, in <module>
+    obj.main()
+  File "C:\Users\jaysh\OneDrive\Desktop\Kidney-Disease-Classification-MLOps\src\cnnClassifier\pipeline\stage_04_model_evaluation.py", line 17, in main
+    evaluation.log_into_mlflow()
+  File "C:\Users\jaysh\OneDrive\Desktop\Kidney-Disease-Classification-MLOps\src\cnnClassifier\components\model_evaluation_mlflow.py", line 60, in log_into_mlflow
+    with mlflow.start_run():
+  File "D:\Anaconda\envs\kidney\lib\site-packages\mlflow\tracking\fluent.py", line 350, in start_run
+    active_run_obj = client.create_run(
+  File "D:\Anaconda\envs\kidney\lib\site-packages\mlflow\tracking\client.py", line 275, in create_run
+    return self._tracking_client.create_run(experiment_id, start_time, tags, run_name)
+  File "D:\Anaconda\envs\kidney\lib\site-packages\mlflow\tracking\_tracking_service\client.py", line 131, in create_run
+    return self.store.create_run(
+  File "D:\Anaconda\envs\kidney\lib\site-packages\mlflow\store\tracking\rest_store.py", line 175, in create_run
+    response_proto = self._call_endpoint(CreateRun, req_body)
+  File "D:\Anaconda\envs\kidney\lib\site-packages\mlflow\store\tracking\rest_store.py", line 56, in _call_endpoint
+    return call_endpoint(self.get_host_creds(), endpoint, method, json_body, response_proto)
+  File "D:\Anaconda\envs\kidney\lib\site-packages\mlflow\utils\rest_utils.py", line 281, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+  File "D:\Anaconda\envs\kidney\lib\site-packages\mlflow\utils\rest_utils.py", line 207, in verify_rest_response
+    raise RestException(json.loads(response.text))
+mlflow.exceptions.RestException: INVALID_PARAMETER_VALUE: Response: {'error_code': 'INVALID_PARAMETER_VALUE'}
+[2026-01-23 01:11:50,138: INFO: stage_01_data_ingestion: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2026-01-23 01:11:50,142: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-23 01:11:50,147: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-23 01:11:50,150: INFO: common: created directory at: artifacts]
+[2026-01-23 01:11:50,151: INFO: common: created directory at: artifacts/data_ingestion]
+[2026-01-23 01:11:50,152: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1lmmwEVh6II154YNf3fGbEZhlp82pV6dc/view?usp=sharing into file artifacts/data_ingestion/data.zip]
+[2026-01-23 02:11:53,121: INFO: stage_01_data_ingestion: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2026-01-23 02:11:53,124: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-23 02:11:53,129: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-23 02:11:53,130: INFO: common: created directory at: artifacts]
+[2026-01-23 02:11:53,131: INFO: common: created directory at: artifacts/data_ingestion]
+[2026-01-23 02:11:53,131: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1lmmwEVh6II154YNf3fGbEZhlp82pV6dc/view?usp=sharing into file artifacts/data_ingestion/data.zip]
+[2026-01-23 16:09:33,468: INFO: stage_01_data_ingestion: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2026-01-23 16:09:33,481: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-23 16:09:33,485: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-23 16:09:33,486: INFO: common: created directory at: artifacts]
+[2026-01-23 16:09:33,487: INFO: common: created directory at: artifacts/data_ingestion]
+[2026-01-23 16:09:33,488: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1lmmwEVh6II154YNf3fGbEZhlp82pV6dc/view?usp=sharing into file artifacts/data_ingestion/data.zip]
+[2026-01-23 16:13:53,981: INFO: stage_01_data_ingestion: >>>>>> stage Data Ingestion stage started <<<<<<]
+[2026-01-23 16:13:53,983: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-23 16:13:53,986: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-23 16:13:53,987: INFO: common: created directory at: artifacts]
+[2026-01-23 16:13:53,988: INFO: common: created directory at: artifacts/data_ingestion]
+[2026-01-23 16:13:53,988: INFO: data_ingestion: Downloading data from https://drive.google.com/file/d/1lmmwEVh6II154YNf3fGbEZhlp82pV6dc/view?usp=sharing into file artifacts/data_ingestion/data.zip]
+[2026-01-23 16:17:17,888: INFO: data_ingestion: Downloaded data from https://drive.google.com/file/d/1lmmwEVh6II154YNf3fGbEZhlp82pV6dc/view?usp=sharing into file artifacts/data_ingestion/data.zip]
+[2026-01-23 16:17:50,195: INFO: stage_01_data_ingestion: >>>>>> stage Data Ingestion stage completed <<<<<<
+
+x==========x]
+[2026-01-23 16:22:07,730: INFO: stage_04_model_evaluation: *******************]
+[2026-01-23 16:22:07,731: INFO: stage_04_model_evaluation: >>>>>> stage Evaluation stage started <<<<<<]
+[2026-01-23 16:22:07,734: INFO: common: YAML file loaded successfully: config\config.yaml]
+[2026-01-23 16:22:07,738: INFO: common: YAML file loaded successfully: params.yaml]
+[2026-01-23 16:22:07,740: INFO: common: created directory at: artifacts]
+[2026-01-23 16:29:23,072: INFO: common: json file saved at: scores.json]
+[2026-01-23 16:29:23,074: INFO: common: json file saved at: scores.json]
+[2026-01-23 16:29:23,075: INFO: stage_04_model_evaluation: >>>>>> stage Evaluation stage completed <<<<<<
+
+x==========x]
