@@ -160,3 +160,7 @@ cython_debug/
 #.idea/
 
 artifacts/*
+
+model/
+*.h5
+artifacts/

@@ -112,3 +112,121 @@ dvc dag
 ### Pipeline DAG Output
 ![Pipeline DAG Output](https://raw.githubusercontent.com/JayShimpi07/Kidney-Disease-Classification-MLOps/ce163a550259c3c8d9e97b0a64db9753a682480e/dvc_dag.png)
 
+````md
+```` 
+## 🚀 AWS CI/CD Deployment with GitHub Actions (EC2 + ECR)
+
+This project supports **automated deployment on AWS** using, **Docker**, **ECR (Elastic Container Registry)**, and **EC2 (Ubuntu Server)**.
+
+---
+
+### Deployment Workflow (How it works)
+
+1. **Build Docker Image** from source code  
+2. **Push Docker Image** to AWS **ECR**  
+3. **Launch EC2 Instance** (Ubuntu)  
+4. EC2 **pulls latest image** from ECR  
+5. **Run Docker container** on EC2
+
+---
+
+## 1️⃣ Create IAM User (Deployment User)
+
+Login to AWS Console → IAM → Users → Create user.
+
+### Required Access
+- **EC2 access** → to manage virtual machine
+- **ECR access** → to push/pull Docker images
+
+### Attach Policies
+Attach these policies to the IAM user:
+
+- `AmazonEC2ContainerRegistryFullAccess`
+- `AmazonEC2FullAccess`
+
+---
+
+## 2️⃣ Create ECR Repository
+
+AWS Console → ECR → Create repository
+
+Example URI:
+```bash
+566373416292.dkr.ecr.us-east-1.amazonaws.com/chicken
+```
+---
+
+## 3️⃣ Create EC2 Instance (Ubuntu)
+
+AWS Console → EC2 → Launch Instance
+Choose: **Ubuntu**
+
+---
+
+## 4️⃣ Install Docker on EC2
+
+SSH into EC2 and run the following commands:
+
+### Optional:
+
+```bash
+sudo apt-get update -y
+sudo apt-get upgrade -y
+```
+
+### Required:
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+### Add ubuntu user to docker group:
+
+```bash
+sudo usermod -aG docker ubuntu
+newgrp docker
+```
+
+---
+
+## 5️⃣ Configure EC2 as Self Hosted GitHub Runner
+
+Go to your GitHub repo:
+
+`Settings → Actions → Runners → New self-hosted runner`
+
+Choose OS: **Linux**
+
+Run the commands shown by GitHub **one by one inside EC2 terminal**.
+
+---
+
+## 6️⃣ Setup GitHub Secrets
+
+Go to:
+
+`Repo Settings → Secrets and variables → Actions → New repository secret`
+
+Add the following secrets:
+
+```txt
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=us-east-1
+AWS_ECR_LOGIN_URI=566373416292.dkr.ecr.us-east-1.amazonaws.com
+ECR_REPOSITORY_NAME=simple-app
+```
+
+---
+
+After this, whenever you push code to GitHub, the GitHub Actions pipeline will:
+
+* Build Docker Image
+* Push to ECR
+* Deploy on EC2 automatically
+
+```
+
+If you want, I can also generate the **complete GitHub Actions YAML file** (`.github/workflows/main.yaml`) for this AWS CI/CD setup.
+```
