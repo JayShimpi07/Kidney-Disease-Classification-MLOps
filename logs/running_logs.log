@@ -322,3 +322,16 @@ OSError: No file or directory found at model\model.h5
 [2026-01-23 18:35:47,477: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:35:47] "GET / HTTP/1.1" 200 -]
 [2026-01-23 18:36:03,596: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:36:03] "POST /predict HTTP/1.1" 200 -]
 [2026-01-23 18:37:29,712: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:37:29] "POST /predict HTTP/1.1" 200 -]
+[2026-01-23 19:22:30,238: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.131.189.1:8080]
+[2026-01-23 19:22:30,240: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2026-01-23 19:22:30,244: INFO: _internal:  * Restarting with stat]
+[2026-01-23 19:22:35,955: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 19:22:35,958: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 19:22:38,209: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 19:22:38] "GET / HTTP/1.1" 200 -]
+[2026-01-23 19:22:42,278: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 19:22:42] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -]
+[2026-01-23 19:23:04,093: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 19:23:04] "GET / HTTP/1.1" 200 -]
+[2026-01-23 19:23:44,001: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 19:23:44] "GET / HTTP/1.1" 200 -]
+[2026-01-23 19:24:39,544: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 19:24:39] "POST /predict HTTP/1.1" 200 -]

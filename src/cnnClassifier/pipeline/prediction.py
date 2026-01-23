@@ -11,8 +11,7 @@ class PredictionPipeline:
 
     def predict(self):
         # load model
-        model = tf.keras.models.load_model("artifacts/training/model.h5")
-
+        model = load_model(os.path.join("model", "model.h5"))
         imagename = self.filename
         test_image = image.load_img(imagename, target_size=(224, 224))
         test_image = image.img_to_array(test_image) / 255.0   # ✅ normalize
