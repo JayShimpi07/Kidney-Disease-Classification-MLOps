@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kidney Disease Classifier</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+  <style>
+    :root{
+      --bg1:#0b1220;
+      --bg2:#0e1a33;
+      --card: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.14);
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.7);
+      --primary:#7c3aed;
+      --green:#22c55e;
+      --red:#ef4444;
+      --shadow: 0 16px 60px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 20%, rgba(124,58,237,.35), transparent 55%),
+        radial-gradient(700px 400px at 90% 10%, rgba(34,197,94,.22), transparent 60%),
+        radial-gradient(800px 500px at 80% 80%, rgba(59,130,246,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    .app{ padding: 28px 0 60px; }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom: 22px;
+    }
+    .brand{ display:flex; gap:12px; align-items:center; }
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,58,237,.9), rgba(34,197,94,.75));
+      box-shadow: 0 16px 40px rgba(124,58,237,.25);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;color:#fff;letter-spacing:.5px;
+    }
+    .title h1{ font-size:18px;margin:0;font-weight:700; }
+    .title p{ margin:2px 0 0; font-size:12.5px; color:var(--muted); }
+
+    .pill{
+      padding:10px 14px;border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      display:flex; gap:8px; align-items:center;
+      color: var(--muted); font-size:12.5px;
+    }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--stroke);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-hd{
+      padding:18px 18px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .card-hd h2{ font-size:15px; margin:0; font-weight:700; }
+    .hint{ font-size:12px; color:var(--muted); }
+
+    .uploader{ padding:18px; }
+    .dropzone{
+      border: 1.5px dashed rgba(255,255,255,.22);
+      border-radius: 18px;
+      background: rgba(0,0,0,.15);
+      padding: 18px;
+      transition: .2s ease;
+    }
+    .dropzone.dragover{
+      transform: translateY(-2px);
+      border-color: rgba(124,58,237,.65);
+      background: rgba(124,58,237,.12);
+    }
+
+    .preview{
+      width:100%;
+      aspect-ratio: 1.3 / 1;
+      border-radius:16px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:14px;
+      position:relative;
+    }
+    .preview img{ width:100%; height:100%; object-fit:cover; display:none; }
+    .preview .placeholder{ padding:18px; color:var(--muted); text-align:center; font-size:13px; }
+
+    .btn-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+    .btnx{
+      flex:1; min-width:150px;
+      padding:12px 14px;
+      border-radius:14px;
+      border: 1px solid rgba(255,255,255,.12);
+      font-weight:600;
+      cursor:pointer;
+      display:flex; justify-content:center; align-items:center; gap:10px;
+    }
+    .btn-upload{
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+    .btn-predict{
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,197,94,.9));
+      border:none; color:#fff;
+      box-shadow: 0 16px 40px rgba(124,58,237,.25);
+    }
+    .btn-predict:disabled{ opacity:.55; cursor:not-allowed; box-shadow:none; }
+
+    .result{ padding:18px; }
+
+    /* ✅ Prediction Summary */
+    .summary{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .summary-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap: wrap;
+    }
+    .big-pred{
+      font-size: 20px;
+      font-weight: 800;
+      margin:0;
+      letter-spacing:.2px;
+    }
+    .badge{
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing:.2px;
+      font-size: 12px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+    }
+    .badge.ok{ border-color: rgba(34,197,94,.35); background: rgba(34,197,94,.12); }
+    .badge.risk{ border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.12); }
+
+    .confidence{
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+    .bar{
+      margin-top: 8px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .bar > div{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, rgba(124,58,237,.95), rgba(34,197,94,.85));
+      border-radius:999px;
+      transition: width .4s ease;
+    }
+
+    pre{
+      color: #d7e4ff;
+      font-size: 12.6px;
+      line-height: 1.4;
+      margin:0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      padding: 14px;
+      min-height: 260px;
+    }
+
+    #loading{
+      position: fixed; inset:0;
+      background: rgba(10,16,30,.55);
+      backdrop-filter: blur(6px);
+      display:none;
+      z-index:9999999;
+      align-items:center; justify-content:center;
+      flex-direction:column; gap:16px;
+    }
+    .spinner{
+      width:64px;height:64px;border-radius:50%;
+      border:7px solid rgba(255,255,255,.18);
+      border-top-color: rgba(124,58,237,.95);
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+    .loading-text{ color:var(--muted); font-size:13px; }
+
+    .footer{ margin-top:18px; color:rgba(234,240,255,.55); font-size:12px; text-align:center; }
+    input[type="file"]{ display:none; }
+  </style>
+</head>
+
+<body>
+<div class="app container">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">KD</div>
+      <div class="title">
+        <h1>Kidney Disease Classification</h1>
+        <p>Upload a CT scan image and get prediction using Deep Learning</p>
+      </div>
+    </div>
+    <div class="pill">
+      <span>⚙️</span>
+      <span>MLflow + DVC Pipeline Enabled</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- LEFT -->
+    <div class="col-lg-5 mb-4">
+      <div class="card">
+        <div class="card-hd">
+          <h2>Upload Image</h2>
+          <div class="hint">PNG / JPG supported</div>
+        </div>
+
+        <div class="uploader">
+          <div class="dropzone" id="dropzone">
+            <div class="preview">
+              <img id="previewImg" alt="Preview" />
+              <div class="placeholder" id="placeholder">
+                <div style="font-size:34px;margin-bottom:8px;">🩻</div>
+                <div><b>Drag & Drop</b> an image here</div>
+                <div>or click <b>Upload</b> button</div>
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <button class="btnx btn-upload" id="btnUpload" type="button">⬆️ Upload</button>
+              <button class="btnx btn-predict" id="btnPredict" type="button" disabled>⚡ Predict</button>
+            </div>
+          </div>
+
+          <input type="hidden" id="url" value="/predict" />
+          <input name="upload" type="file" id="fileinput" accept="image/*" />
+        </div>
+      </div>
+
+      <div class="footer">Tip: For best results, upload a clear CT scan image.</div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-lg-7 mb-4">
+      <div class="card">
+        <div class="card-hd">
+          <h2>Prediction Results</h2>
+          <div class="hint">Summary + JSON output</div>
+        </div>
+
+        <div class="result">
+
+          <!-- ✅ Summary Panel -->
+          <div class="summary">
+            <div class="summary-top">
+              <p class="big-pred" id="predLabel">Prediction: —</p>
+              <span class="badge" id="predBadge">Waiting</span>
+            </div>
+
+            <div class="confidence" id="confText">Confidence: —%</div>
+            <div class="bar"><div id="confBar"></div></div>
+          </div>
+
+          <!-- JSON -->
+          <pre id="jsonRes">{}</pre>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <div class="loading-text">Running prediction… please wait</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+  let base_data = "";
+
+  const dropzone = document.getElementById("dropzone");
+  const fileInput = document.getElementById("fileinput");
+  const btnUpload = document.getElementById("btnUpload");
+  const btnPredict = document.getElementById("btnPredict");
+
+  const previewImg = document.getElementById("previewImg");
+  const placeholder = document.getElementById("placeholder");
+
+  const jsonRes = document.getElementById("jsonRes");
+
+  // ✅ New UI elements
+  const predLabel = document.getElementById("predLabel");
+  const predBadge = document.getElementById("predBadge");
+  const confText = document.getElementById("confText");
+  const confBar = document.getElementById("confBar");
+
+  function setLoading(isLoading){
+    if(isLoading){
+      $("#loading").css("display","flex");
+      btnPredict.disabled = true;
+      btnUpload.disabled = true;
+      btnUpload.style.opacity = ".7";
+      btnPredict.style.opacity = ".7";
+    } else {
+      $("#loading").hide();
+      btnUpload.disabled = false;
+      btnUpload.style.opacity = "1";
+      btnPredict.style.opacity = "1";
+      btnPredict.disabled = (base_data === "");
+    }
+  }
+
+  function resetOutput(){
+    jsonRes.textContent = "{}";
+    predLabel.textContent = "Prediction: —";
+    predBadge.textContent = "Waiting";
+    predBadge.className = "badge";
+    confText.textContent = "Confidence: —%";
+    confBar.style.width = "0%";
+  }
+
+  function renderPreview(url){
+    previewImg.src = url;
+    previewImg.style.display = "block";
+    placeholder.style.display = "none";
+  }
+
+  function toBase64(file){
+    return new Promise((resolve, reject)=>{
+      const reader = new FileReader();
+      reader.onload = function(e){
+        const url = e.target.result;
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = function(){
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const dataUrl = canvas.toDataURL("image/jpeg", 1.0);
+          const b64 = dataUrl.replace(/^data:image.+;base64,/, "");
+          resolve({b64, previewUrl: url});
+        };
+        img.src = url;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleFile(file){
+    if(!file) return;
+    if(!file.type.startsWith("image/")){
+      alert("Please upload a valid image file.");
+      return;
+    }
+
+    resetOutput();
+
+    const {b64, previewUrl} = await toBase64(file);
+    base_data = b64;
+
+    renderPreview(previewUrl);
+    btnPredict.disabled = false;
+  }
+
+  function sendRequest(){
+    if(!base_data){
+      alert("Please upload an image first.");
+      return;
+    }
+
+    const url = $("#url").val();
+    setLoading(true);
+
+    $.ajax({
+      url: url,
+      type: "POST",
+      cache: false,
+      async: true,
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      data: JSON.stringify({ image: base_data }),
+
+      success: function(res){
+        try{
+          // Your backend returns something like {"image":"Normal"} OR list
+          jsonRes.textContent = JSON.stringify(res, null, 2);
+
+          let prediction = "";
+          let confidence = null;
+
+          // Handle multiple return formats safely
+          if(Array.isArray(res) && res.length > 0){
+            // if it returns [{...}]
+            const r0 = res[0];
+            prediction = r0.prediction || r0.image || "";
+            confidence = r0.confidence ?? null;
+          } else if(typeof res === "object"){
+            prediction = res.prediction || res.image || "";
+            confidence = res.confidence ?? null;
+          }
+
+          if(prediction){
+            predLabel.textContent = "Prediction: " + prediction;
+
+            // Badge logic
+            const isRisk = (prediction.toLowerCase().includes("tumor") || prediction.toLowerCase().includes("cyst") || prediction.toLowerCase().includes("stone"));
+            predBadge.textContent = isRisk ? "Risk Detected" : "Healthy";
+            predBadge.className = isRisk ? "badge risk" : "badge ok";
+          }
+
+          if(confidence !== null && confidence !== undefined){
+            confText.textContent = "Confidence: " + confidence + "%";
+            confBar.style.width = Math.max(0, Math.min(100, confidence)) + "%";
+          } else {
+            confText.textContent = "Confidence: Not provided by API";
+            confBar.style.width = "0%";
+          }
+
+        } catch(err){
+          jsonRes.textContent = "Error parsing response.\n" + err;
+        }
+        setLoading(false);
+      },
+
+      error: function(xhr){
+        setLoading(false);
+        jsonRes.textContent =
+          "Request failed.\n" +
+          "Status: " + xhr.status + "\n" +
+          (xhr.responseText ? xhr.responseText : "");
+        alert("Prediction API error. Check backend / endpoint.");
+      }
+    });
+  }
+
+  btnUpload.addEventListener("click", ()=> fileInput.click());
+  btnPredict.addEventListener("click", ()=> sendRequest());
+
+  fileInput.addEventListener("change", (e)=> {
+    const file = e.target.files[0];
+    handleFile(file);
+  });
+
+  ["dragenter","dragover"].forEach(evt=>{
+    dropzone.addEventListener(evt, (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add("dragover");
+    });
+  });
+
+  ["dragleave","drop"].forEach(evt=>{
+    dropzone.addEventListener(evt, (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove("dragover");
+    });
+  });
+
+  dropzone.addEventListener("drop", (e)=>{
+    const file = e.dataTransfer.files[0];
+    if(file){
+      fileInput.value = "";
+      handleFile(file);
+    }
+  });
+
+  resetOutput();
+</script>
+</body>
+</html>

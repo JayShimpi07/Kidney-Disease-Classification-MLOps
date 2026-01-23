@@ -216,3 +216,109 @@ x==========x]
 [2026-01-23 16:29:23,075: INFO: stage_04_model_evaluation: >>>>>> stage Evaluation stage completed <<<<<<
 
 x==========x]
+[2026-01-23 17:55:35,408: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.131.189.1:8080]
+[2026-01-23 17:55:35,409: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2026-01-23 17:55:50,051: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 17:55:50] "GET / HTTP/1.1" 200 -]
+[2026-01-23 17:56:22,182: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 17:56:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -]
+[2026-01-23 17:56:49,420: ERROR: app: Exception on /predict [POST]]
+Traceback (most recent call last):
+  File "D:\Anaconda\envs\kidney\lib\site-packages\flask\app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\Anaconda\envs\kidney\lib\site-packages\flask\app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\Anaconda\envs\kidney\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "D:\Anaconda\envs\kidney\lib\site-packages\flask\app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\Anaconda\envs\kidney\lib\site-packages\flask\app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "D:\Anaconda\envs\kidney\lib\site-packages\flask_cors\decorator.py", line 121, in wrapped_function
+    resp = make_response(f(*args, **kwargs))
+  File "C:\Users\jaysh\OneDrive\Desktop\Kidney-Disease-Classification-MLOps\app.py", line 44, in predictRoute
+    result = clApp.classifier.predict()
+  File "C:\Users\jaysh\OneDrive\Desktop\Kidney-Disease-Classification-MLOps\src\cnnClassifier\pipeline\prediction.py", line 13, in predict
+    model = load_model(os.path.join("model", "model.h5"))
+  File "D:\Anaconda\envs\kidney\lib\site-packages\keras\saving\saving_api.py", line 212, in load_model
+    return legacy_sm_saving_lib.load_model(
+  File "D:\Anaconda\envs\kidney\lib\site-packages\keras\utils\traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "D:\Anaconda\envs\kidney\lib\site-packages\keras\saving\legacy\save.py", line 230, in load_model
+    raise IOError(
+OSError: No file or directory found at model\model.h5
+[2026-01-23 17:56:49,500: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 17:56:49] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -]
+[2026-01-23 18:01:24,047: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.131.189.1:8080]
+[2026-01-23 18:01:24,047: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2026-01-23 18:01:24,051: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:01:29,623: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:01:29,629: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:02:04,088: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:02:04] "GET / HTTP/1.1" 200 -]
+[2026-01-23 18:02:23,059: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:02:23] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -]
+[2026-01-23 18:04:53,331: INFO: _internal:  * Detected change in 'C:\\Users\\jaysh\\OneDrive\\Desktop\\Kidney-Disease-Classification-MLOps\\src\\cnnClassifier\\pipeline\\prediction.py', reloading]
+[2026-01-23 18:04:54,155: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:05:01,002: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:05:01,007: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:05:04,119: INFO: _internal:  * Detected change in 'C:\\Users\\jaysh\\OneDrive\\Desktop\\Kidney-Disease-Classification-MLOps\\src\\cnnClassifier\\pipeline\\prediction.py', reloading]
+[2026-01-23 18:05:04,773: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:05:11,918: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:05:11,923: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:05:11,971: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:05:11] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -]
+[2026-01-23 18:05:29,530: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.131.189.1:8080]
+[2026-01-23 18:05:29,531: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2026-01-23 18:05:29,534: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:05:35,251: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:05:35,255: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:05:36,098: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:05:36] "GET / HTTP/1.1" 200 -]
+[2026-01-23 18:05:51,474: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:05:51] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -]
+[2026-01-23 18:10:37,436: INFO: _internal:  * Detected change in 'C:\\Users\\jaysh\\OneDrive\\Desktop\\Kidney-Disease-Classification-MLOps\\src\\cnnClassifier\\pipeline\\prediction.py', reloading]
+[2026-01-23 18:10:38,163: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:10:45,595: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:10:45,599: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:11:06,221: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.131.189.1:8080]
+[2026-01-23 18:11:06,222: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2026-01-23 18:11:06,225: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:11:11,847: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:11:11,851: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:11:17,935: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:11:17] "GET / HTTP/1.1" 200 -]
+[2026-01-23 18:12:16,288: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:12:16] "POST /predict HTTP/1.1" 200 -]
+[2026-01-23 18:15:18,294: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:15:18] "POST /predict HTTP/1.1" 200 -]
+[2026-01-23 18:15:31,226: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:15:31] "POST /predict HTTP/1.1" 200 -]
+[2026-01-23 18:15:49,693: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:15:49] "POST /predict HTTP/1.1" 200 -]
+[2026-01-23 18:23:07,712: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.131.189.1:8080]
+[2026-01-23 18:23:07,713: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2026-01-23 18:23:07,719: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:23:13,229: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:23:13,232: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:23:19,942: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:23:19] "GET / HTTP/1.1" 200 -]
+[2026-01-23 18:23:51,694: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:23:51] "POST /predict HTTP/1.1" 200 -]
+[2026-01-23 18:33:02,549: INFO: _internal:  * Detected change in 'C:\\Users\\jaysh\\OneDrive\\Desktop\\Kidney-Disease-Classification-MLOps\\app.py', reloading]
+[2026-01-23 18:33:03,661: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:33:11,802: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:33:11,807: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:34:06,292: INFO: _internal:  * Detected change in 'C:\\Users\\jaysh\\OneDrive\\Desktop\\Kidney-Disease-Classification-MLOps\\src\\cnnClassifier\\pipeline\\prediction.py', reloading]
+[2026-01-23 18:34:07,091: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:35:38,795: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.131.189.1:8080]
+[2026-01-23 18:35:38,795: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2026-01-23 18:35:38,798: INFO: _internal:  * Restarting with stat]
+[2026-01-23 18:35:44,834: WARNING: _internal:  * Debugger is active!]
+[2026-01-23 18:35:44,837: INFO: _internal:  * Debugger PIN: 134-448-678]
+[2026-01-23 18:35:47,477: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:35:47] "GET / HTTP/1.1" 200 -]
+[2026-01-23 18:36:03,596: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:36:03] "POST /predict HTTP/1.1" 200 -]
+[2026-01-23 18:37:29,712: INFO: _internal: 127.0.0.1 - - [23/Jan/2026 18:37:29] "POST /predict HTTP/1.1" 200 -]
