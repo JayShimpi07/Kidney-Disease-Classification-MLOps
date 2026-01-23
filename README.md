@@ -109,3 +109,6 @@ dvc repro
 ```bash
 dvc dag
 ```
+### Pipeline DAG Output
+![Pipeline DAG Output](https://raw.githubusercontent.com/JayShimpi07/Kidney-Disease-Classification-MLOps/ce163a550259c3c8d9e97b0a64db9753a682480e/dvc_dag.png)
+
