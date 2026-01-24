@@ -152,7 +152,7 @@ AWS Console → ECR → Create repository
 
 Example URI:
 ```bash
-566373416292.dkr.ecr.us-east-1.amazonaws.com/chicken
+230153192159.dkr.ecr.ap-south-1.amazonaws.com/kidneyclassification
 ```
 ---
 
