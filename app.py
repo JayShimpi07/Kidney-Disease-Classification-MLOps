@@ -1,67 +1,58 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import os
-from flask_cors import CORS, cross_origin
+
 from cnnClassifier.utils.common import decodeImage
 from cnnClassifier.pipeline.prediction import PredictionPipeline
 
-os.putenv("LANG", "en_US.UTF-8")
-os.putenv("LC_ALL", "en_US.UTF-8")
-
+# -------------------- APP SETUP --------------------
 app = Flask(__name__)
 CORS(app)
 
-
+# -------------------- CLIENT APP CLASS --------------------
 class ClientApp:
     def __init__(self):
         self.filename = "inputImage.jpg"
         self.classifier = PredictionPipeline(self.filename)
 
+# 🔥 IMPORTANT: Create global instance (needed for Gunicorn)
+clApp = ClientApp()
 
-@app.route("/", methods=["GET"])
-@cross_origin()
+# -------------------- ROUTES --------------------
+
+@app.route("/", methods=['GET'])
 def home():
-    return render_template("index.html")
+    return render_template('index.html')
 
 
-@app.route("/train", methods=["GET", "POST"])
-@cross_origin()
-def trainRoute():
-    os.system("python main.py")
-    # os.system("dvc repro")
-    return "✅ Training done successfully!"
-
-
-@app.route("/predict", methods=["POST"])
-@cross_origin()
+@app.route("/predict", methods=['POST'])
 def predictRoute():
     try:
-        data = request.get_json(force=True)
+        if not request.json or 'image' not in request.json:
+            return jsonify({"error": "No image data provided"}), 400
 
-        if data is None or "image" not in data:
-            return jsonify({"error": "No image found in request body"}), 400
+        image = request.json['image']
 
-        image_b64 = data["image"]
+        # Decode base64 image to file
+        decodeImage(image, clApp.filename)
 
-        # ✅ handle base64 header if present
-        if "," in image_b64:
-            image_b64 = image_b64.split(",")[1]
-
-        # ✅ decode and save
-        decodeImage(image_b64, clApp.filename)
-
-        # ✅ predict
+        # Get prediction
         result = clApp.classifier.predict()
 
         return jsonify(result)
 
     except Exception as e:
-        # ✅ return actual error to frontend (helps debugging)
         return jsonify({"error": str(e)}), 500
 
 
-if __name__ == "__main__":
-    clApp = ClientApp()
+@app.route("/train", methods=['GET'])
+def trainRoute():
+    try:
+        os.system("python main.py")
+        return "Training completed successfully!"
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
-    # ✅ Debug=True for development (shows errors clearly)
-    # Set debug=False when deploying
-    app.run(host="0.0.0.0", port=8080, debug=True)
+
+# DO NOT use app.run() for Render
+# Gunicorn handles the server
