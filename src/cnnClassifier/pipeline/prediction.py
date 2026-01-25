@@ -28,11 +28,17 @@ class PredictionPipeline:
         else:
             prediction = "Normal"
 
-        return [{
-            "prediction": prediction,
-            "confidence": round(confidence, 2),
-            "probabilities": {
-                "Normal": round(float(probs[0]) * 100, 2),
-                "Tumor": round(float(probs[1]) * 100, 2)
-            }
-        }]
+        return [
+    {
+        "prediction": prediction,
+        "confidence": round(confidence, 2),
+        "probabilities": {
+            "Normal": round(float(probs[0]) * 100, 2),
+            "Tumor": round(float(probs[1]) * 100, 2)
+        }
+    },
+    {
+        "image": ""   # placeholder so frontend doesn't crash
+    }
+]
+
