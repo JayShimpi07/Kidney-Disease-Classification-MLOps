@@ -326,7 +326,9 @@ docker run -p 8080:8080 kidney-classifier
 
 ### 🧾 Application Interface
 
-![UI](assets/ui.png)
+![UI](https://github.com/JayShimpi07/Kidney-Disease-Classification-MLOps/blob/d26fc291c74d777eeb7955ca37d1e37b317a026d/Normal.png)
+
+![UI](https://github.com/JayShimpi07/Kidney-Disease-Classification-MLOps/blob/d26fc291c74d777eeb7955ca37d1e37b317a026d/Tumor.png)
 
 # 🧩 Complete System Flow
 
@@ -336,34 +338,11 @@ Data → DVC Pipeline → Model Training → MLflow Logging → Model Saving
 ```
 
 ---
-
-# 🔮 Future Enhancements
-
-* Grad-CAM for medical explainability
-* Model optimization (TensorRT / ONNX)
-* User authentication
-* Database logging of predictions
-* Multi-class disease detection
-
 ---
 
 # 👨‍💻 Author
 
 **Jay Shimpi**
-AI & Data Science Engineer 🚀
-
----
-
-Now your README shows:
-
-🧠 AI
-⚙ MLOps
-☁ Cloud
-🔄 CI/CD
-🐳 Docker
-📊 Tracking
-📦 Pipelines
-
-This is **resume + interview ready**.
+AI & Data Science Student 🚀
 
 ---
