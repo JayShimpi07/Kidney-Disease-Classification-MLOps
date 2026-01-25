@@ -43,8 +43,6 @@ pip install -r requirements.txt
 MLflow is used to track experiments, log metrics, parameters, artifacts, and models.
 
 - 📘 [MLflow Documentation ↗](https://mlflow.org/docs/latest/index.html)
-- 🎥 [MLflow Tutorial ↗](https://www.youtube.com/watch?v=qdcHHrsXA48)
-
 
 ### Run MLflow UI locally
 ```bash
@@ -111,9 +109,7 @@ dvc dag
 ```
 ### Pipeline DAG Output
 ![Pipeline DAG Output](https://raw.githubusercontent.com/JayShimpi07/Kidney-Disease-Classification-MLOps/ce163a550259c3c8d9e97b0a64db9753a682480e/dvc_dag.png)
-
-````md
-```` 
+ 
 ## 🚀 AWS CI/CD Deployment with GitHub Actions (EC2 + ECR)
 
 This project supports **automated deployment on AWS** using, **Docker**, **ECR (Elastic Container Registry)**, and **EC2 (Ubuntu Server)**.
@@ -226,25 +222,6 @@ After this, whenever you push code to GitHub, the GitHub Actions pipeline will:
 * Push to ECR
 * Deploy on EC2 automatically
 
-```
-
-If you want, I can also generate the **complete GitHub Actions YAML file** (`.github/workflows/main.yaml`) for this AWS CI/CD setup.
-```
-Ohhh this is already **solid level README** 🔥
-Now you’re at the stage where we make it look like a **FINAL-YEAR / INDUSTRY PROJECT**.
-
-You’ve written:
-✔ MLflow
-✔ DVC
-✔ AWS CI/CD
-✔ EC2 + ECR
-✔ GitHub Actions
-
-Now what’s missing is the **“Project Finish Touch” section** 👇
-Add this **AFTER** your current content.
-
----
-
 # 🌐 Live Deployment (Render)
 
 The application is deployed on **Render Cloud Platform** for real-time inference.
@@ -337,12 +314,10 @@ Data → DVC Pipeline → Model Training → MLflow Logging → Model Saving
 → Flask API → Web UI → Docker → CI/CD → Cloud Deployment (Render + AWS)
 ```
 
----
----
-
 # 👨‍💻 Author
 
 **Jay Shimpi**
+
 AI & Data Science Student 🚀
 
 ---
