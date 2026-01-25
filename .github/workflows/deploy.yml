@@ -11,10 +11,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Trigger Render Deploy
+      - name: Deploy to Render
         run: |
-          curl -X POST https://api.render.com/v1/services/srv-d5qhdu15pdvs7396ifa0/deploys \
-          -H "Accept: application/json" \
+          curl -X POST https://api.render.com/deploy/srv-d5qhdu15pdvs7396ifa0 \
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
